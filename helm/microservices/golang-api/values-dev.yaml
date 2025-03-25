@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: weerapatx/hello-go-api
-  tag: develop-2c22d46
+  tag: develop-64f9a3e
   pullPolicy: IfNotPresent
 
 container:
