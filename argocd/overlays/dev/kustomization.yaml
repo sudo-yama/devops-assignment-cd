@@ -1,0 +1,56 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+patches:
+  - path: configmap.yaml
+    
+  # - path: patch-ingress.yaml
+  #   target:
+  #     kind: Ingress
+  #     name: argocd-ingress
+
+  - path: patch-values-api.yaml    
+    target:
+      kind: ApplicationSet
+      name: golang-api
+
+replacements:
+
+  - source: #microservice api branch
+      kind: ConfigMap
+      name: env-config
+      namespace: argocd
+      fieldPath: data.argo_branch
+    targets:
+      - select:
+          kind: ApplicationSet
+          name: golang-api
+        fieldPaths:
+          - spec.template.spec.source.targetRevision
+
+  - source: #microservice api namespace
+      kind: ConfigMap
+      name: env-config
+      namespace: argocd
+      fieldPath: data.argo_ns
+    targets:
+      - select:
+          kind: ApplicationSet
+          name: golang-api
+        fieldPaths:
+          - spec.template.spec.destination.namespace
+
+  - source: #microservice redis namespace
+      kind: ConfigMap
+      name: env-config
+      namespace: argocd
+      fieldPath: data.argo_ns
+    targets:
+      - select:
+          kind: ApplicationSet
+          name: redis
+        fieldPaths:
+          - spec.template.spec.destination.namespace        

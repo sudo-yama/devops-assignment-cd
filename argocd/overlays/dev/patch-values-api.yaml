@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: golang-api
+spec:
+  template:
+    spec:
+      source:
+        helm:
+          valueFiles:
+            - values-dev.yaml
