@@ -18,10 +18,10 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: microservice
+  name: microservices
   namespace: argocd
   labels:
-    project: microservice
+    project: microservices
 spec:
   clusterResourceWhitelist:
   - group: '*'
