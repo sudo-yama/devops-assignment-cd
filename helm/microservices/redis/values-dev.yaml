@@ -1,9 +1,0 @@
-replicaCount: 2
-
-persistence:
-  enabled: true
-  size: 1Gi
-
-auth:
-  enabled: true
-  password: "mysecurepassword"

@@ -17,11 +17,6 @@ patches:
       kind: ApplicationSet
       name: golang-api
 
-  - path: patch-values-redis.yaml    
-    target:
-      kind: ApplicationSet
-      name: redis
-
 replacements:
 
   - source: #microservice api branch
@@ -47,18 +42,6 @@ replacements:
           name: golang-api
         fieldPaths:
           - spec.template.spec.destination.namespace
-        
-  - source: #microservice redis branch 
-      kind: ConfigMap
-      name: env-config
-      namespace: argocd
-      fieldPath: data.argo_branch
-    targets:
-      - select:
-          kind: ApplicationSet
-          name: redis
-        fieldPaths:
-          - spec.template.spec.source.targetRevision
 
   - source: #microservice redis namespace
       kind: ConfigMap
