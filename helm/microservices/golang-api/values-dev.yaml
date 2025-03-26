@@ -45,3 +45,7 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
+  tls:
+    - secretName: api-golang
+      hosts:
+        - api.i-heng.store
