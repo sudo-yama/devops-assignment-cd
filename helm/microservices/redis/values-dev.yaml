@@ -1,14 +1,10 @@
-replicaCount: 2
+replicaCount: 3
 
 persistence:
-  enabled: true
-  size: 1Gi
-  storageClass: "standard"
-  accessMode: ReadWriteOnce
+  enabled: false
 
 auth:
-  enabled: true
-  password: "mysecurepassword"
+  enabled: false
 
 service:
   type: ClusterIP
@@ -17,9 +13,3 @@ service:
 cluster:
   enabled: true
   slaveCount: 1
-
-extraEnvVars:
-  - name: "REDIS_MAXMEMORY"
-    value: "2gb"
-  - name: "REDIS_MAXMEMORY_POLICY"
-    value: "allkeys-lru"
