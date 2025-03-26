@@ -17,7 +17,7 @@ patches:
       kind: ApplicationSet
       name: golang-api
 
-  - path: patch-values-api.yaml    
+  - path: patch-values-redis.yaml    
     target:
       kind: ApplicationSet
       name: redis
