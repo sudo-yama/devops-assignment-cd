@@ -19,6 +19,6 @@ spec:
                 port:
                   number: {{ .Values.services.port }}
   tls:
-    - secretName: {{ .Values.ingress.tlsSecret }}
+    - secretName: {{ .Values.ingress.tlsSecret | quote }}
       hosts:
         - {{ .Values.ingress.host }}
