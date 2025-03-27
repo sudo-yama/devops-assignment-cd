@@ -6,7 +6,7 @@ resources:
 - argocd-ingress.yaml
 - configmap.yaml
 - infrastructure.yaml
-# - microservices.yaml
+- microservices.yaml
 - monitoring.yaml
 
 

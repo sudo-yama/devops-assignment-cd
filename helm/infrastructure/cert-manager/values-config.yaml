@@ -1,19 +1,21 @@
-installCRDs: true               
+installCRDs: true
+
 cert-manager:
   prometheus:
-    enabled: true              
-apiVersion: cert-manager.io/v1  
+    enabled: true
 
-clusterIssuers:
-  - name: letsencrypt
-    provider:
-      name: acme            
-    acme:
-      email: wsinbunyama@gmail.com  
-      server: https://acme-v02.api.letsencrypt.org/directory 
-      privateKeySecretRef:
-        name: letsencrypt
-      solvers:
-        - http01:
-            ingress:
-              class: nginx        
+certManager:
+  apiVersion: cert-manager.io/v1
+  clusterIssuers:
+    - name: letsencrypt
+      provider:
+        name: acme
+      acme:
+        email: wsinbunyama@gmail.com
+        server: https://acme-v02.api.letsencrypt.org/directory
+        privateKeySecretRef:
+          name: letsencrypt
+        solvers:
+          - http01:
+              ingress:
+                class: nginx
