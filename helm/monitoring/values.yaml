@@ -14,9 +14,11 @@ grafana:
         paths:
           - path: /
             pathType: Prefix
-
-
+            
 prometheus:
+  service:
+    type: LoadBalancer
+
   ingress:
     enabled: true
     className: "nginx"
