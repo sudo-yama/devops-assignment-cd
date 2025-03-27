@@ -2,7 +2,6 @@ installCRDs: true
 cert-manager:
   prometheus:
     enabled: true              
-extraArgs: []
 apiVersion: cert-manager.io/v1  
 
 clusterIssuers:
