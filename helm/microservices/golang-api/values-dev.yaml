@@ -47,7 +47,7 @@ ingress:
           pathType: Prefix
           backend:
             service:
-              name: my-app
+              name: golang-api-hello-api
               port:
                 number: 8080
   tls:
