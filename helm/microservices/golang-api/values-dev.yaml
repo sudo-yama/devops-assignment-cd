@@ -46,10 +46,10 @@ ingress:
         - path: /
           pathType: Prefix
           backend:
-          service:
-            name: golang-api
-            port:
-              number: 8080
+            service:
+              name: my-app
+              port:
+                number: 8080
   tls:
     - secretName: golang-api-tls
       hosts:
