@@ -2,7 +2,6 @@ grafana:
   adminPassword: "supersecurepassword"
   service:
     type: LoadBalancer
-
   ingress:
     enabled: true
     className: "nginx"
@@ -18,7 +17,6 @@ grafana:
 prometheus:
   service:
     type: LoadBalancer
-
   ingress:
     enabled: true
     className: "nginx"
