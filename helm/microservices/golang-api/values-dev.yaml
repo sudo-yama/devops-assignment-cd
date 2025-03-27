@@ -34,6 +34,12 @@ hpa:
       enabled: true
       averageUtilization: 70 
 
+ingress:
+  enabled: true
+  host: api.i-heng.store
+  clusterIssuer: "letsencrypt"
+  tlsSecret: golang-api-tls
+  
 services:
-  name: golang-api-hello-api
+  name: golang-api-hello-api 
   port: 8080
