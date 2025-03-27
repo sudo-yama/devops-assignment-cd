@@ -17,4 +17,4 @@ clusterIssuers:
       solvers:
         - http01:
             ingress:
-              class: nginx         
+              class: nginx        
