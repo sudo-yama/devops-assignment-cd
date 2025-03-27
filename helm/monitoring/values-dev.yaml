@@ -1,0 +1,10 @@
+grafana:
+  adminPassword: "supersecurepassword"
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    hosts:
+      - grafana.i-heng.store
