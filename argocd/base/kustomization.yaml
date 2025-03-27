@@ -3,9 +3,9 @@ kind: Kustomization
 
 resources:
 - appproject.yaml
-# - argocd-ingress.yaml
+- argocd-ingress.yaml
 - configmap.yaml
-# - infrastructure.yaml
+- infrastructure.yaml
 # - microservices.yaml
 - monitoring.yaml
 

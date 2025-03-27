@@ -18,8 +18,9 @@ spec:
         targetRevision: 58.2.1
         chart: kube-prometheus-stack
         helm:
-          values:
-            - https://raw.githubusercontent.com/sudo-yama/devops-assignment-cd/develop/helm/monitoring/prometheus-grafana/values.yaml
+          releaseName: "monitoring"
+          valueFiles:
+            - https://raw.githubusercontent.com/sudo-yama/devops-assignment-cd/refs/heads/develop/helm/monitoring/values-dev.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: monitoring

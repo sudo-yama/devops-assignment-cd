@@ -1,11 +1,3 @@
-clusterIssuer:
-  name: "letsencrypt"
-  ingressClassName: "nginx"
-  acme:
-    # The ACME server URL
-    server: "https://acme-v02.api.letsencrypt.org/directory"
-    # Your email address used for ACME registration
-    email: "wsinbunyama@gmail.com"
 # +docs:section=Global
 
 # Default values for cert-manager.
