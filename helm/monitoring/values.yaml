@@ -1,0 +1,4 @@
+grafana:
+  adminPassword: "supersecurepassword"
+service:
+  type: LoadBalancer
