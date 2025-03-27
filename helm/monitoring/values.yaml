@@ -14,7 +14,4 @@ grafana:
         paths:
           - path: /
             pathType: Prefix
-    tls:
-      - secretName: grafana-tls
-        hosts:
-          - grafana.i-heng.store
+
