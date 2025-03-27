@@ -1,5 +1,5 @@
 installCRDs: true               
-certmanager:
+cert-manager:
   prometheus:
     enabled: true              
 extraArgs:
