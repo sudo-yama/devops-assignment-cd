@@ -2,8 +2,7 @@ installCRDs: true
 cert-manager:
   prometheus:
     enabled: true              
-extraArgs:
-  - "--enable-certificate-manager"
+extraArgs: []
 apiVersion: cert-manager.io/v1  
 
 
