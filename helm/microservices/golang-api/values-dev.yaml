@@ -34,23 +34,6 @@ hpa:
       enabled: true
       averageUtilization: 70 
 
-ingress:
-  enabled: true
-  className: "nginx"
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt"
-    kubernetes.io/ingress.class: "nginx"
-  hosts:
-    - host: api.i-heng.store
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: golang-api-hello-api
-              port:
-                number: 8080
-  tls:
-    - secretName: golang-api-tls
-      hosts:
-        - api.i-heng.store
+service:
+  name: golang-api-hello-api
+  port: 8080
