@@ -64,6 +64,8 @@ jobs:
 
       - name: Kustomize file 
         run: |
+          pwd 
+          ls -la
           kubectl kustomize argocd/overlays/dev > /tmp/argocd.yaml
           cat /tmp/argocd.yam
 
