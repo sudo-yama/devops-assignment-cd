@@ -28,7 +28,8 @@ jobs:
           echo "Installing Google Cloud SDK"
           curl https://sdk.cloud.google.com | bash
           source $HOME/google-cloud-sdk/path.bash.inc
-          sudo update && sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+          gcloud components update
+          gcloud components install gke-gcloud-auth-plugin
 
       - name: Set up GCP authen
         run: |
