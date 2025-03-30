@@ -64,11 +64,8 @@ jobs:
 
       - name: Kustomize file 
         run: |
-          pwd 
-          ls -la
           kubectl kustomize argocd/overlays/dev > /tmp/argocd.yaml
-          ls -ls /tmp
-          cat /tmp/argocd.yam
+          cat /tmp/argocd.yaml
 
       - name: Apply yaml
         if: github.event_name == 'workflow_dispatch'
