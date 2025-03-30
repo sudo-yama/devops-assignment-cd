@@ -46,10 +46,9 @@ jobs:
 
       - name: Install kustomize
         run: |
-          echo "Installing kustomize"
-          curl -sSL -o kustomize_v5.6.0_linux_amd64.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize_v5.6.0/kustomize_v5.6.0_linux_amd64.tar.gz
-          tar -zxvf kustomize_v5.6.0_linux_amd64.tar.gz
-          sudo mv kustomize /usr/local/bin/
+          curl -sSL -o kustomize_v5.6.0_linux_amd64.tar https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize_v5.6.0/kustomize_v5.6.0_linux_amd64.tar
+          tar -xvf kustomize_v5.6.0_linux_amd64.tar
+          sudo mv kustomize_v5.6.0_linux_amd64 /usr/local/bin/
           kustomize version
 
       - name: List GKE Clusters
