@@ -61,12 +61,6 @@ jobs:
           echo "Configuring kubeconfig"
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GKE_REGION }} --project ${{ secrets.GCP_PROJECT_ID }}
           kubectl config view
-      
-      - name: Check Current kubectl Context
-        run: |
-          echo "Checking current kubectl context"
-          kubectl config current-context
-          kubectl get pods -A
 
       - name: Kustomize file 
         run: |
