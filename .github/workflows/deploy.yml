@@ -1,0 +1,93 @@
+name: Deploy argocd on GKE
+
+on:
+  push:
+    branches:
+    - develop
+    - staging
+    - main
+  pull_request:
+    branches:
+    - develop
+    - staging
+    - main
+  workflow_dispatch:
+    
+jobs:
+  develop:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v3
+
+      - name: Install Google Cloud SDK (gcloud)
+        run: |
+          echo "Installing Google Cloud SDK"
+          curl https://sdk.cloud.google.com | bash
+          source $HOME/google-cloud-sdk/path.bash.inc
+
+      - name: Set up GCP authen
+        run: |
+          echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > "${HOME}/gcp-key.json"
+          ls -la ${HOME}
+          gcloud auth activate-service-account --key-file="${HOME}/gcp-key.json"
+          gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "${HOME}/gcp-key.json"
+
+      - name: Install kubectl
+        run: |
+          echo "Installing kubectl"
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+          kubectl version --client
+
+      - name: Install ArgoCD CLI
+        run: |
+          echo "Installing ArgoCD CLI"
+          curl -sSL -o argocd "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64"
+          chmod +x argocd
+          sudo mv argocd /usr/local/bin/
+          argocd version --client
+
+      - name: Install kustomize
+        run: |
+          echo "Installing kustomize"
+          curl -sSL -o kustomize "https://github.com/kubernetes-sigs/kustomize/releases/latest/download/kustomize_linux_amd64"
+          chmod +x kustomize
+          sudo mv kustomize /usr/local/bin/
+          kustomize version
+
+      - name: List GKE Clusters
+        run: |
+          echo "Listing GKE Clusters"
+          gcloud container clusters list
+
+      - name: Configure kubectl for GKE
+        run: |
+          echo "Configuring kubeconfig"
+          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GKE_REGION }} --project ${{ secrets.GCP_PROJECT_ID }}
+          kubectl config view
+      
+      - name: Check Current kubectl Context
+        run: |
+          echo "Checking current kubectl context"
+          kubectl config current-context
+          kubectl get pods -A
+
+      - name: Kustomize file 
+        run: |
+          kubectl kustomize argocd/overlays/dev > /tmp/argocd.yaml
+          cat /tmp/argocd.yam
+
+      - name: Apply argocd 
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          kubectl apply -f /tmp/argocd.yaml
+
+      - name: Apply config cert-manager
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          kubectl apply -f helm/infrastructure/cert-manager/clusterissuer.yaml
