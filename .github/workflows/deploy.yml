@@ -67,6 +67,7 @@ jobs:
           pwd 
           ls -la
           kubectl kustomize argocd/overlays/dev > /tmp/argocd.yaml
+          ls -ls /tmp
           cat /tmp/argocd.yam
 
       - name: Apply yaml
