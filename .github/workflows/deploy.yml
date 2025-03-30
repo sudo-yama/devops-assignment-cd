@@ -45,7 +45,6 @@ jobs:
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
           kubectl version --client
-          gcloud components update kubectl
 
       - name: Install kustomize
         run: |
