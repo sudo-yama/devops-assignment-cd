@@ -47,7 +47,7 @@ jobs:
       - name: Install ArgoCD CLI
         run: |
           echo "Installing ArgoCD CLI"
-          curl -sSL -o argocd "https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64"
+          curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           chmod +x argocd
           sudo mv argocd /usr/local/bin/
           argocd version --client
@@ -55,8 +55,8 @@ jobs:
       - name: Install kustomize
         run: |
           echo "Installing kustomize"
-          curl -sSL -o kustomize "https://github.com/kubernetes-sigs/kustomize/releases/latest/download/kustomize_linux_amd64"
-          chmod +x kustomize
+          curl -sSL -o kustomize_v5.6.0_linux_amd64.tar.gz https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize_v5.6.0/kustomize_v5.6.0_linux_amd64.tar.gz
+          tar -xvf kustomize_v5.6.0_linux_amd64.tar.gz
           sudo mv kustomize /usr/local/bin/
           kustomize version
 
