@@ -73,4 +73,5 @@ jobs:
         run: |
           pwd
           ls -la
-          kubectl apply -f helm/infrastructure/cert-manager/clusterissuer.yaml
+          kubectl apply -f helm/infrastructure/cert-manager/Clusterissuer.yaml
+
