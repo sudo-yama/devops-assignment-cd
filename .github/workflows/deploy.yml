@@ -14,7 +14,9 @@ on:
   workflow_dispatch:
     
 env:
-          GOOGLE_APPLICATION_CREDENTIALS: "${HOME}/gcp-key.json"  
+  GOOGLE_APPLICATION_CREDENTIALS: "${HOME}/gcp-key.json"  
+  USE_GKE_GCLOUD_AUTH_PLUGIN: "True"
+
 jobs:
   develop:
     if: github.ref == 'refs/heads/develop'
@@ -23,14 +25,12 @@ jobs:
       - name: Checkout code 
         uses: actions/checkout@v3
 
-      - name: Install Google Cloud SDK (gcloud)
-        run: |
-          echo "Installing Google Cloud SDK"
-          curl https://sdk.cloud.google.com | bash
-          source $HOME/google-cloud-sdk/path.bash.inc
-          gcloud components update
-          gcloud components install gke-gcloud-auth-plugin
-          export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
 
       - name: Set up GCP authen
         run: |
@@ -41,10 +41,7 @@ jobs:
 
       - name: Install kubectl
         run: |
-          echo "Installing kubectl"
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
+          gcloud components install kubectl
           kubectl version --client
 
       - name: Install kustomize
