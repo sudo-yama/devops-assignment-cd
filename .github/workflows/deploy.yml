@@ -68,11 +68,9 @@ jobs:
           cat /tmp/argocd.yaml
 
       - name: Apply yaml
-        if: github.event_name == 'workflow_dispatch'
         run: |
           kubectl apply -f /tmp/argocd.yaml
 
       - name: Apply config cert-manager
-        if: github.event_name == 'workflow_dispatch'
         run: |
           kubectl apply -f helm/infrastructure/cert-manager/clusterissuer.yaml
