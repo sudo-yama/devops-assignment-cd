@@ -71,4 +71,6 @@ jobs:
 
       - name: Apply config cert-manager
         run: |
+          pwd
+          ls -la
           kubectl apply -f helm/infrastructure/cert-manager/clusterissuer.yaml
