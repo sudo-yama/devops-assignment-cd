@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: weerapatx/hello-go-api
-  tag: "eb6b3e7"
+  tag: "8c4a2de"
   pullPolicy: IfNotPresent
 container:
   name: hello-api
